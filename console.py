@@ -87,21 +87,21 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """Prints all instances based or not on the class name
         """
-        if not arg:
-            print([str(v) for k, v in models.storage.all().items()])
-        else:
+        if arg:
             if not self.clslist.get(arg):
                 print("** class doesn't exist **")
                 return False
             print([str(v) for k, v in models.storage.all().items()
                    if type(v) is self.clslist.get(arg)])
+        else:
+            print([str(v) for k, v in models.storage.all().items()])
 
     def do_update(self, arg):
         """Updates an instance based on the class name and id
         """
         clsname, objid, attrname, kyvalue = None, None, None, None
         updatetime = datetime.now()
-        args = arg.split(' ', 3)
+        args = arg.split(3, ' ')
         if len(args) > 0:
             clsname = args[0]
         if len(args) > 1:
